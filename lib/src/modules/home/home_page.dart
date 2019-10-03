@@ -19,7 +19,6 @@ class _HomePageState extends State<HomePage> {
           (BuildContext context, AsyncSnapshot<List<CouponModel>> snapshot) {
         switch (snapshot.connectionState) {
           case ConnectionState.none:
-            return Text('Press button to start.');
           case ConnectionState.active:
           case ConnectionState.waiting:
             return Center(
