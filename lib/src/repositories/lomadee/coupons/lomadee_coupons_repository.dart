@@ -1,29 +1,39 @@
-import 'dart:convert';
-
-import 'package:http/http.dart' as http;
+import 'package:dio/dio.dart';
+import 'package:dio_http_cache/dio_http_cache.dart';
 
 import '../../../shared/models/coupon/coupon_model.dart';
 import '../lomadee_config.dart';
 
-class LomadeeCouponsRepository extends LomadeeConfig {
+class LomadeeCouponsRepository {
+  static DioCacheManager _dioCacheManager = DioCacheManager(
+    CacheConfig(
+      baseUrl: '${LomadeeConfig.baseUrl}${LomadeeConfig.appToken}/',
+    ),
+  );
+
   Future<List<CouponModel>> getCoupons() async {
-    http.Response _response;
+    Response _response;
 
     try {
-      _response = await http.get(
-        '$baseUrl$appToken/coupon/_all?sourceId=$sourceId',
-        headers: {
-          'Accept-Charset': 'application/x-www-form-urlencoded; charset=UTF-8',
-        },
+      Dio _dio = Dio(
+        BaseOptions(
+          baseUrl: '${LomadeeConfig.baseUrl}${LomadeeConfig.appToken}/',
+          contentType: "application/x-www-form-urlencoded; charset=utf-8",
+        ),
+      )..interceptors.add(_dioCacheManager.interceptor);
+
+      _response = await _dio.get(
+        'coupon/_all?sourceId=${LomadeeConfig.sourceId}',
+        options: buildCacheOptions(
+          Duration(hours: 1),
+        ),
       );
 
       if (_response.statusCode == 200 || _response.statusCode == 201) {
-        final Map<String, dynamic> responseData = json.decode(_response.body);
-
-        if (responseData.containsKey('coupons')) {
+        if (_response.data.containsKey('coupons')) {
           List<CouponModel> _coupons = [];
 
-          responseData['coupons'].forEach((couponData) {
+          _response.data['coupons'].forEach((couponData) {
             _coupons.add(CouponModel.fromJson(couponData));
           });
 
