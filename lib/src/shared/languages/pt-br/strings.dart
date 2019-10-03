@@ -6,4 +6,10 @@ class Strings {
 
   // Home
   static const String homeTitle = "Home";
+
+  // Favorites
+  static const String favoritesTitle = "Favoritos";
+
+  // Coupons
+  static const String couponsTitle = "Cupons";
 }
