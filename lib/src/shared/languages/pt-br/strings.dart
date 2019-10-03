@@ -10,6 +10,6 @@ class Strings {
   // Favorites
   static const String favoritesTitle = "Favoritos";
 
-  // Coupons
-  static const String couponsTitle = "Cupons";
+  // MyCoupons
+  static const String myCouponsTitle = "Meus Cupons";
 }

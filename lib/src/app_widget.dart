@@ -24,7 +24,7 @@ class AppWidget extends StatelessWidget {
             ),
             BottomNavigationBarItem(
               icon: Icon(CupertinoIcons.collections_solid),
-              title: Text(Strings.couponsTitle),
+              title: Text(Strings.myCouponsTitle),
             ),
           ],
         ),
