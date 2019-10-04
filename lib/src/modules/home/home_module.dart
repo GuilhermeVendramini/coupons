@@ -11,7 +11,6 @@ class HomeModule extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<HomeProvider>(builder: (_) => HomeProvider(
-            LomadeeCouponsRepository(),
         )),
       ],
       child: HomePage(),
