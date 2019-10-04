@@ -12,13 +12,16 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final _appBloc = Provider.of<AppProvider>(context);
-
-    if (_appBloc.getCouponsState == CouponsState.LOADING) {
-      return Center(
-        child: CupertinoActivityIndicator(),
-      );
-    }
-
-    return Text(_appBloc.getCoupons.toString());
+    return StreamBuilder<CouponsState>(
+      initialData: CouponsState.IDLE,
+      stream: _appBloc.getCouponsState,
+      builder: (context, snapshot) {
+        return Container(
+          child: snapshot.data == CouponsState.LOADING
+              ? CupertinoActivityIndicator()
+              : Text(_appBloc.getCoupons.toString()),
+        );
+      },
+    );
   }
 }

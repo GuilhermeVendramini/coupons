@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:rxdart/subjects.dart';
 
 import 'repositories/lomadee/coupons/lomadee_coupons_repository.dart';
 import 'shared/models/coupon/coupon_model.dart';
@@ -10,19 +11,28 @@ class AppBloc with ChangeNotifier {
 
   AppBloc(this._couponsRepository);
 
-  List<CouponModel> _coupons;
-  CouponsState _couponsState = CouponsState.IDLE;
+  final BehaviorSubject<List<CouponModel>> _coupons =
+      BehaviorSubject<List<CouponModel>>();
+  final BehaviorSubject<CouponsState> _couponsState =
+      BehaviorSubject<CouponsState>();
+
+  @override
+  void dispose() {
+    _coupons.close();
+    _couponsState.close();
+    super.dispose();
+  }
 }
 
 class App extends AppBloc {
   App(LomadeeCouponsRepository couponsRepository) : super(couponsRepository);
 
   List<CouponModel> get getCoupons {
-    return _coupons;
+    return _coupons.value;
   }
 
-  CouponsState get getCouponsState {
-    return _couponsState;
+  Stream<CouponsState> get getCouponsState {
+    return _couponsState.stream;
   }
 }
 
@@ -31,12 +41,14 @@ class AppProvider extends App {
       : super(couponsRepository);
 
   Future<Null> loadCoupons() async {
-    if (_couponsState == CouponsState.DONE) return null;
-    _couponsState = CouponsState.LOADING;
-    if (_coupons == null || _coupons.isEmpty) {
-      _coupons = await _couponsRepository.getCoupons();
-      _couponsState = CouponsState.DONE;
-      notifyListeners();
+    if (_couponsState.value == CouponsState.DONE) return null;
+    _couponsState.add(CouponsState.LOADING);
+    if (_coupons.value == null || _coupons.value.isEmpty) {
+      List<CouponModel> _result = await _couponsRepository.getCoupons();
+      _coupons.add(_result);
+      _coupons.close();
+      _couponsState.add(CouponsState.DONE);
+      _couponsState.close();
     }
   }
 }

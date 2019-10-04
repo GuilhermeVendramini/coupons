@@ -10,9 +10,11 @@ class AppModule extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<AppProvider>(builder: (_) => AppProvider(
+        ChangeNotifierProvider<AppProvider>(
+          builder: (_) => AppProvider(
             LomadeeCouponsRepository(),
-        ),),
+          ),
+        ),
       ],
       child: AppWidget(),
     );

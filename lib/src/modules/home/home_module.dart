@@ -1,4 +1,3 @@
-import 'package:coupons/src/repositories/lomadee/coupons/lomadee_coupons_repository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 
@@ -10,8 +9,7 @@ class HomeModule extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<HomeProvider>(builder: (_) => HomeProvider(
-        )),
+        ChangeNotifierProvider<HomeProvider>(builder: (_) => HomeProvider()),
       ],
       child: HomePage(),
     );
