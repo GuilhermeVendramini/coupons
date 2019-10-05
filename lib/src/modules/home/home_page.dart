@@ -1,3 +1,4 @@
+import 'package:coupons/src/shared/widgets/coupons/coupons_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 
@@ -19,7 +20,7 @@ class _HomePageState extends State<HomePage> {
         return Container(
           child: snapshot.data == CouponsState.LOADING
               ? CupertinoActivityIndicator()
-              : Text(_appBloc.getCoupons.toString()),
+              : CouponsList(_appBloc.getCoupons),
         );
       },
     );
