@@ -3,7 +3,8 @@ import 'package:flutter/cupertino.dart';
 class DefaultColors {
   DefaultColors._();
 
-  static final Color black = Color.fromRGBO(0, 0, 0, 1);
+  static const Color transparent = Color(0x00000000);
+  static const Color black = Color(0xFF000000);
   static final Color primary = Color.fromRGBO(241, 148, 138, 1);
   static final Color grey = Color.fromRGBO(128, 128, 128, 1);
   static final Color white = CupertinoColors.white;

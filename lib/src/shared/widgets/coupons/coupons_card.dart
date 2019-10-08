@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 import '../../colors/default_colors.dart';
 import '../../models/coupon/coupon_model.dart';
@@ -8,25 +9,30 @@ class CouponsCard extends StatelessWidget {
 
   CouponsCard(this._coupon);
 
+  final _textColor = DefaultColors.white;
+
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        print('tap');
-      },
+    return Material(
       child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20.0),
-          color: DefaultColors.colorByDiscount(_coupon.discount),
-        ),
-        margin: const EdgeInsets.all(12.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            _mainBox(),
-            _footer(),
-          ],
+        margin: const EdgeInsets.all(10.0),
+        child: Ink(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20.0),
+            color: DefaultColors.colorByDiscount(_coupon.discount),
+          ),
+          child: InkWell(
+            borderRadius: BorderRadius.circular(20.0),
+            onTap: () {},
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                _mainBox(),
+                _footer(),
+              ],
+            ),
+          ),
         ),
       ),
     );
@@ -35,6 +41,15 @@ class CouponsCard extends StatelessWidget {
   Widget _mainBox() {
     return Expanded(
       child: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomLeft,
+              colors: [
+                DefaultColors.white.withOpacity(0.2),
+                DefaultColors.transparent
+              ]),
+        ),
         padding: const EdgeInsets.all(20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -65,6 +80,7 @@ class CouponsCard extends StatelessWidget {
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
         style: TextStyle(
+          color: _textColor,
           fontSize: 36.0,
         ),
       ),
@@ -77,6 +93,7 @@ class CouponsCard extends StatelessWidget {
       overflow: TextOverflow.ellipsis,
       maxLines: 3,
       style: TextStyle(
+        color: _textColor,
         fontWeight: FontWeight.w300,
       ),
     );
@@ -86,6 +103,7 @@ class CouponsCard extends StatelessWidget {
     return Text(
       _coupon.category.name,
       style: TextStyle(
+        color: _textColor,
         fontWeight: FontWeight.bold,
       ),
     );
@@ -100,7 +118,11 @@ class CouponsCard extends StatelessWidget {
       ),
       child: Text(
         '-${_coupon.discount.round().toString()}%',
-        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
+        style: TextStyle(
+          color: _textColor,
+          fontWeight: FontWeight.bold,
+          fontSize: 18.0,
+        ),
       ),
     );
   }
