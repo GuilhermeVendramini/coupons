@@ -45,10 +45,12 @@ class AppProvider extends App {
     _couponsState.add(CouponsState.LOADING);
     if (_coupons.value == null || _coupons.value.isEmpty) {
       List<CouponModel> _result = await _couponsRepository.getCoupons();
-      _coupons.add(_result);
-      _coupons.close();
-      _couponsState.add(CouponsState.DONE);
-      _couponsState.close();
+      if (!_coupons.isClosed) {
+        _coupons.add(_result);
+        _coupons.close();
+        _couponsState.add(CouponsState.DONE);
+        _couponsState.close();
+      }
     }
   }
 }

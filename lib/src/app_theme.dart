@@ -8,5 +8,10 @@ class AppTheme {
   static final CupertinoThemeData themeData = new CupertinoThemeData(
     brightness: Brightness.light,
     primaryColor: DefaultColors.primary,
+    textTheme: CupertinoTextThemeData(
+      textStyle: TextStyle(
+        color: DefaultColors.white,
+      ),
+    ),
   );
 }

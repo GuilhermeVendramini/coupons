@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
-import '../../models/coupon/coupon_model.dart';
-import 'coupons_card.dart';
+import '../../../shared/models/coupon/coupon_model.dart';
+import '../../../shared/widgets/coupons/coupons_card.dart';
 
 class CouponsList extends StatelessWidget {
   final List<CouponModel> _coupons;
