@@ -18,6 +18,7 @@ class _HomePageState extends State<HomePage> {
       stream: _appBloc.getCouponsState,
       builder: (context, snapshot) {
         return Container(
+          alignment: Alignment.center,
           child: snapshot.data == CouponsState.LOADING
               ? CupertinoActivityIndicator()
               : CouponsList(_appBloc.getCoupons),

@@ -1,13 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../../modules/coupon/coupon_module.dart';
 import '../../colors/default_colors.dart';
 import '../../models/coupon/coupon_model.dart';
 
-class CouponsCard extends StatelessWidget {
+class CouponCard extends StatelessWidget {
   final CouponModel _coupon;
 
-  CouponsCard(this._coupon);
+  CouponCard(this._coupon);
 
   final _textColor = DefaultColors.white;
 
@@ -23,7 +24,12 @@ class CouponsCard extends StatelessWidget {
           ),
           child: InkWell(
             borderRadius: BorderRadius.circular(20.0),
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                context,
+                CupertinoPageRoute(builder: (context) => CouponModule()),
+              );
+            },
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -42,6 +48,9 @@ class CouponsCard extends StatelessWidget {
     return Expanded(
       child: Container(
         decoration: BoxDecoration(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20.0),
+          ),
           gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomLeft,

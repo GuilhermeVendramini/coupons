@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
 import '../../../shared/models/coupon/coupon_model.dart';
-import '../../../shared/widgets/coupons/coupons_card.dart';
+import '../../../shared/widgets/coupon/coupon_card.dart';
 
 class CouponsList extends StatelessWidget {
   final List<CouponModel> _coupons;
@@ -19,7 +19,7 @@ class CouponsList extends StatelessWidget {
                 ),
                 itemCount: _coupons.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return CouponsCard(_coupons[index]);
+                  return CouponCard(_coupons[index]);
                 }),
           )
         : Container();

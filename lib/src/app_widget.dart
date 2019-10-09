@@ -33,33 +33,26 @@ class AppWidget extends StatelessWidget {
           ],
         ),
         tabBuilder: (BuildContext context, int index) {
-          assert(index >= 0 && index <= 2);
           switch (index) {
             case 0:
-              return CupertinoTabView(
-                builder: (BuildContext context) {
-                  return SafeArea(
-                    child: HomeModule(),
-                  );
-                },
+              return CupertinoPageScaffold(
+                child: SafeArea(
+                  child: HomeModule(),
+                ),
               );
               break;
             case 1:
-              return CupertinoTabView(
-                builder: (BuildContext context) {
-                  return SafeArea(
-                    child: Text('Tab 2'),
-                  );
-                },
+              return CupertinoPageScaffold(
+                child: SafeArea(
+                  child: Text('1'),
+                ),
               );
               break;
             case 2:
-              return CupertinoTabView(
-                builder: (BuildContext context) {
-                  return SafeArea(
-                    child: Text('Tab 3'),
-                  );
-                },
+              return CupertinoPageScaffold(
+                child: SafeArea(
+                  child: Text('2'),
+                ),
               );
               break;
           }
