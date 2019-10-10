@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import 'app_bloc.dart';
 import 'app_theme.dart';
+import 'modules/favorites/favorites_module.dart';
 import 'modules/home/home_module.dart';
 import 'shared/languages/pt-br/strings.dart';
 
@@ -11,6 +12,7 @@ class AppWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final _bloc = Provider.of<AppProvider>(context);
     _bloc.loadCoupons();
+    _bloc.loadFavorites();
 
     return CupertinoApp(
       title: Strings.appName,
@@ -44,7 +46,7 @@ class AppWidget extends StatelessWidget {
             case 1:
               return CupertinoPageScaffold(
                 child: SafeArea(
-                  child: Text('1'),
+                  child: FavoritesModule(),
                 ),
               );
               break;

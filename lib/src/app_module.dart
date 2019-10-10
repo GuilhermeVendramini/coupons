@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'app_bloc.dart';
 import 'app_widget.dart';
 import 'repositories/lomadee/coupons/lomadee_coupons_repository.dart';
+import 'repositories/sqflite/coupons/sqflite_coupons_repository.dart';
 
 class AppModule extends StatelessWidget {
   @override
@@ -13,6 +14,7 @@ class AppModule extends StatelessWidget {
         ChangeNotifierProvider<AppProvider>(
           builder: (_) => AppProvider(
             LomadeeCouponsRepository(),
+            SqfliteCouponsRepository(),
           ),
         ),
       ],

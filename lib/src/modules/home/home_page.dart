@@ -1,8 +1,8 @@
-import 'package:coupons/src/modules/home/widgets/coupons_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 
 import '../../app_bloc.dart';
+import '../../shared/widgets/coupon/coupon_list.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -21,7 +21,7 @@ class _HomePageState extends State<HomePage> {
           alignment: Alignment.center,
           child: snapshot.data == CouponsState.LOADING
               ? CupertinoActivityIndicator()
-              : CouponsList(_appBloc.getCoupons),
+              : CouponList(_appBloc.getCoupons),
         );
       },
     );

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../../../modules/coupon/coupon_module.dart';
 import '../../colors/default_colors.dart';
 import '../../models/coupon/coupon_model.dart';
+import 'coupon_favorite.dart';
 
 class CouponCard extends StatelessWidget {
   final CouponModel _coupon;
@@ -27,7 +28,7 @@ class CouponCard extends StatelessWidget {
             onTap: () {
               Navigator.push(
                 context,
-                CupertinoPageRoute(builder: (context) => CouponModule()),
+                CupertinoPageRoute(builder: (context) => CouponModule(_coupon)),
               );
             },
             child: Column(
@@ -63,7 +64,7 @@ class CouponCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            _title(),
+            _header(),
             SizedBox(
               height: 20.0,
             ),
@@ -74,9 +75,10 @@ class CouponCard extends StatelessWidget {
     );
   }
 
-  Widget _title() {
+  Widget _header() {
     return Container(
-      constraints: const BoxConstraints(minWidth: double.infinity),
+      padding: EdgeInsets.only(bottom: 10.0),
+      //constraints: const BoxConstraints(minWidth: double.infinity),
       decoration: BoxDecoration(
         border: Border(
           bottom: BorderSide(
@@ -84,6 +86,18 @@ class CouponCard extends StatelessWidget {
           ),
         ),
       ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          _title(),
+          CouponFavorite(this._coupon.id),
+        ],
+      ),
+    );
+  }
+
+  Widget _title() {
+    return Flexible(
       child: Text(
         _coupon.store.name,
         maxLines: 1,
