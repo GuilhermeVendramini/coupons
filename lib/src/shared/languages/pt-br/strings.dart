@@ -15,6 +15,7 @@ class Strings {
   static const String myCouponsTitle = "Meus Cupons";
 
   // Coupon
-  static const String couponCodeTitle = "Código";
+  static const String couponCodeTitle = "Cupom";
   static const String couponCodeCopy = "Copiar";
+  static const String couponObtainCode = "Obter cupom";
 }

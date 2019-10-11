@@ -53,12 +53,13 @@ class CouponCard extends StatelessWidget {
             topLeft: Radius.circular(20.0),
           ),
           gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomLeft,
-              colors: [
-                DefaultColors.white.withOpacity(0.2),
-                DefaultColors.transparent
-              ]),
+            begin: Alignment.topCenter,
+            end: Alignment.bottomLeft,
+            colors: [
+              DefaultColors.white.withOpacity(0.2),
+              DefaultColors.transparent
+            ],
+          ),
         ),
         padding: const EdgeInsets.all(20.0),
         child: Column(

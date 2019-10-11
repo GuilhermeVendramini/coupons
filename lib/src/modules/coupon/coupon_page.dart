@@ -48,11 +48,8 @@ class _CouponPageState extends State<CouponPage> {
                     SizedBox(
                       height: 40.0,
                     ),
-                    _codeTitle(),
-                    SizedBox(
-                      height: 10.0,
-                    ),
-                    _code(),
+                    _obtainCode(),
+                    _couponBox(),
                   ],
                 ),
               ),
@@ -60,6 +57,18 @@ class _CouponPageState extends State<CouponPage> {
           ),
         ),
       ),
+    );
+  }
+
+  Widget _couponBox() {
+    return Column(
+      children: <Widget>[
+        _codeTitle(),
+        SizedBox(
+          height: 10.0,
+        ),
+        _code(),
+      ],
     );
   }
 
@@ -96,12 +105,12 @@ class _CouponPageState extends State<CouponPage> {
       padding: EdgeInsets.all(12.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(30.0),
-        color: DefaultColors.black.withOpacity(0.1),
+        color: DefaultColors.white.withOpacity(0.1),
       ),
       child: Text(
         '-${widget._coupon.discount}%',
         style: TextStyle(
-          fontSize: 30.0,
+          fontSize: 24.0,
           color: _textColor,
         ),
       ),
@@ -114,6 +123,44 @@ class _CouponPageState extends State<CouponPage> {
       style: TextStyle(
         color: _textColor,
         fontWeight: FontWeight.w300,
+      ),
+    );
+  }
+
+  Widget _obtainCode() {
+    return Material(
+      color: DefaultColors.transparent,
+      child: Ink(
+        decoration: BoxDecoration(
+          color: DefaultColors.black.withOpacity(0.1),
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        child: InkWell(
+          borderRadius: BorderRadius.circular(10.0),
+          child: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomLeft,
+                colors: [
+                  DefaultColors.transparent,
+                  DefaultColors.black.withOpacity(0.1),
+                ],
+              ),
+              borderRadius: BorderRadius.circular(10.0),
+              color: DefaultColors.white,
+            ),
+            padding: EdgeInsets.all(20.0),
+            child: Text(
+              Strings.couponObtainCode.toUpperCase(),
+              style: TextStyle(
+                fontSize: 24.0,
+                color: _textColor,
+              ),
+            ),
+          ),
+          onTap: () {},
+        ),
       ),
     );
   }
