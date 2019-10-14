@@ -30,6 +30,10 @@ class SQFLiteConnection {
       await db.execute("CREATE TABLE favorites ("
           "coupon_id INTEGER PRIMARY KEY"
           ")");
+
+      await db.execute("CREATE TABLE my_coupons ("
+          "coupon_id INTEGER PRIMARY KEY"
+          ")");
     });
   }
 

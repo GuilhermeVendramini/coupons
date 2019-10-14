@@ -13,6 +13,7 @@ class AppWidget extends StatelessWidget {
     final _bloc = Provider.of<AppProvider>(context);
     _bloc.loadCoupons();
     _bloc.loadFavorites();
+    _bloc.loadMyCoupons();
 
     return CupertinoApp(
       title: Strings.appName,

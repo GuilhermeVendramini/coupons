@@ -10,7 +10,7 @@ class SqfliteCouponsRepository extends SQFLiteConnection {
     return _result.map<int>((it) => it['coupon_id']).toList();
   }
 
-  Future<bool> delete({@required int couponID}) async {
+  Future<bool> deleteFavorite({@required int couponID}) async {
     final _db = await database;
     int _result = await _db.delete(
       'favorites',
@@ -25,9 +25,42 @@ class SqfliteCouponsRepository extends SQFLiteConnection {
     return false;
   }
 
-  Future<bool> insert({@required int couponID}) async {
+  Future<bool> insertFavorite({@required int couponID}) async {
     final _db = await database;
     int _result = await _db.insert('favorites', {"coupon_id": couponID});
+
+    if (_result != null && _result > 0) {
+      return true;
+    }
+
+    return false;
+  }
+
+  Future<List<int>> myCoupons() async {
+    final _db = await database;
+    List<Map<String, dynamic>> _result = await _db.query('my_coupons');
+
+    return _result.map<int>((it) => it['coupon_id']).toList();
+  }
+
+  Future<bool> deleteMyCoupon({@required int couponID}) async {
+    final _db = await database;
+    int _result = await _db.delete(
+      'my_coupons',
+      where: 'coupon_id = ?',
+      whereArgs: [couponID],
+    );
+
+    if (_result != null && _result > 0) {
+      return true;
+    }
+
+    return false;
+  }
+
+  Future<bool> insertMyCoupon({@required int couponID}) async {
+    final _db = await database;
+    int _result = await _db.insert('my_coupons', {"coupon_id": couponID});
 
     if (_result != null && _result > 0) {
       return true;

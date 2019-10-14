@@ -19,6 +19,7 @@ class AppBloc with ChangeNotifier {
       BehaviorSubject<CouponsState>();
 
   List<int> _favoriteCoupons;
+  List<int> _myCoupons;
 
   @override
   void dispose() {
@@ -41,6 +42,14 @@ class App extends AppBloc {
     return _favoriteCoupons;
   }
 
+  List<int> get getMyCouponsID {
+    return _myCoupons;
+  }
+
+  set addToMyCoupons(int couponID) {
+    _myCoupons.add(couponID);
+  }
+
   Stream<CouponsState> get getCouponsState {
     return _couponsState.stream;
   }
@@ -54,8 +63,12 @@ class AppProvider extends App {
   Future<Null> loadCoupons() async {
     if (_couponsState.value == CouponsState.DONE) return null;
     _couponsState.add(CouponsState.LOADING);
-    if (_coupons.value == null || _coupons.value.isEmpty) {
-      List<CouponModel> _result = await _lomadeeCouponsRepository.getCoupons();
+    if (_coupons.value == null) {
+      List<CouponModel> _result = await _lomadeeCouponsRepository
+          .getCoupons()
+          .timeout(Duration(seconds: 10), onTimeout: () {
+        return [];
+      });
       if (!_coupons.isClosed) {
         _coupons.add(_result);
         _coupons.close();
@@ -73,17 +86,25 @@ class AppProvider extends App {
     _favoriteCoupons = await _sqfliteCouponsRepository.favorites();
   }
 
+  Future<Null> loadMyCoupons() async {
+    if (_myCoupons != null) {
+      return null;
+    }
+    _myCoupons = [];
+    _myCoupons = await _sqfliteCouponsRepository.myCoupons();
+  }
+
   Future<Null> toggleCouponFavorite({@required int couponID}) async {
     try {
       if (await isCouponFavorite(couponID: couponID)) {
         bool _result =
-            await _sqfliteCouponsRepository.delete(couponID: couponID);
+            await _sqfliteCouponsRepository.deleteFavorite(couponID: couponID);
 
         if (_result)
           _favoriteCoupons.removeWhere((coupon) => coupon == couponID);
       } else {
         bool _result =
-            await _sqfliteCouponsRepository.insert(couponID: couponID);
+            await _sqfliteCouponsRepository.insertFavorite(couponID: couponID);
         if (_result) _favoriteCoupons.add(couponID);
       }
       notifyListeners();

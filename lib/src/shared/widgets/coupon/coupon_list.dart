@@ -1,3 +1,5 @@
+import 'package:coupons/src/shared/colors/default_colors.dart';
+import 'package:coupons/src/shared/languages/pt-br/strings.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../../models/coupon/coupon_model.dart';
@@ -23,6 +25,11 @@ class CouponList extends StatelessWidget {
               },
             ),
           )
-        : Container();
+        : Container(
+            child: Text(
+              Strings.couponLoadError,
+              style: TextStyle(color: DefaultColors.primary),
+            ),
+          );
   }
 }
