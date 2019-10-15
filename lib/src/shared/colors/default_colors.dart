@@ -4,7 +4,7 @@ class DefaultColors {
   DefaultColors._();
 
   static const Color transparent = Color(0x00000000);
-  static const Color red = Color.fromRGBO(241, 138, 138, 1);
+  static const Color red = Color.fromRGBO(236, 112, 99, 1);
   static const Color black = Color(0xFF000000);
   static final Color primary = Color.fromRGBO(241, 148, 138, 1);
   static final Color grey = Color.fromRGBO(128, 128, 128, 1);
@@ -12,7 +12,7 @@ class DefaultColors {
 
   static Color colorByDiscount(double discount) {
     if (discount <= 10.0) {
-      return Color.fromRGBO(229, 152, 102, 1);
+      return Color.fromRGBO(241, 148, 138, 1);
     } else if (discount <= 20.0) {
       return Color.fromRGBO(125, 206, 160, 1);
     } else if (discount <= 30.0) {

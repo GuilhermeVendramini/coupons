@@ -1,7 +1,7 @@
-import '../../colors/default_colors.dart';
-import '../../models/coupon/coupon_model.dart';
 import 'package:flutter/cupertino.dart';
 
+import '../../colors/default_colors.dart';
+import '../../models/coupon/coupon_model.dart';
 import 'coupon_fields_display.dart';
 
 class CouponDisplay extends StatelessWidget {
@@ -35,18 +35,18 @@ class CouponDisplay extends StatelessWidget {
             SizedBox(
               height: 20.0,
             ),
-            couponCodeValidity(
-              vigency: _coupon.vigency,
-            ),
-            SizedBox(
-              height: 20.0,
-            ),
             couponDiscount(
               discount: _coupon.discount,
               fontSize: 20.0,
             ),
             SizedBox(
-              height: 40.0,
+              height: 20.0,
+            ),
+            couponCodeValidity(
+              vigency: _coupon.vigency,
+            ),
+            SizedBox(
+              height: 20.0,
             ),
             couponObtained(
               context: context,

@@ -46,14 +46,14 @@ class _CouponPageState extends State<CouponPage> {
                     SizedBox(
                       height: 40.0,
                     ),
-                    couponCodeValidity(
-                      vigency: widget._coupon.vigency,
+                    couponDiscount(
+                      discount: widget._coupon.discount,
                     ),
                     SizedBox(
                       height: 40.0,
                     ),
-                    couponDiscount(
-                      discount: widget._coupon.discount,
+                    couponCodeValidity(
+                      vigency: widget._coupon.vigency,
                     ),
                     SizedBox(
                       height: 40.0,
