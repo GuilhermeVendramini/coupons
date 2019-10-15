@@ -10,15 +10,18 @@ import '../../models/coupon/coupon_model.dart';
 
 final Color _textColor = DefaultColors.white;
 
-Widget couponObtained(
-    {@required BuildContext context, @required CouponModel coupon}) {
+Widget couponObtained({
+  @required BuildContext context,
+  @required CouponModel coupon,
+  double fontSize,
+}) {
   return Column(
     children: <Widget>[
       couponCodeTitle(),
       SizedBox(
         height: 10.0,
       ),
-      couponCode(coupon.code),
+      couponCode(code: coupon.code, fontSize: fontSize),
       SizedBox(
         height: 40.0,
       ),
@@ -37,7 +40,7 @@ Widget couponCodeTitle() {
   );
 }
 
-Widget couponCode(String code) {
+Widget couponCode({@required String code, double fontSize = 28.0}) {
   return Wrap(
     alignment: WrapAlignment.center,
     spacing: 10.0,
@@ -47,7 +50,7 @@ Widget couponCode(String code) {
         code,
         style: TextStyle(
           color: _textColor,
-          fontSize: 28.0,
+          fontSize: fontSize,
           fontWeight: FontWeight.w400,
           letterSpacing: 2.0,
         ),
@@ -85,6 +88,8 @@ Widget couponCode(String code) {
 
 Widget couponRedeem(
     {@required BuildContext context, @required CouponModel coupon}) {
+  final Color _couponColor = DefaultColors.colorByDiscount(coupon.discount);
+
   return Material(
     color: DefaultColors.transparent,
     child: Ink(
@@ -113,11 +118,17 @@ Widget couponRedeem(
           Navigator.of(context).push(
             CupertinoPageRoute(
               builder: (context) => Container(
-                color: DefaultColors.colorByDiscount(coupon.discount),
+                color: _couponColor,
                 child: SafeArea(
                   child: WebviewScaffold(
                     appBar: CupertinoNavigationBar(
                       previousPageTitle: Strings.appName,
+                      middle: Text(
+                        coupon.code,
+                        style: TextStyle(
+                          color: _couponColor,
+                        ),
+                      ),
                     ),
                     withLocalStorage: true,
                     appCacheEnabled: true,
@@ -178,7 +189,7 @@ Widget couponImage({@required String storeImage, @required String storeName}) {
   );
 }
 
-Widget couponDiscount({@required double discount}) {
+Widget couponDiscount({@required double discount, double fontSize = 24.0}) {
   return Container(
     padding: EdgeInsets.all(12.0),
     decoration: BoxDecoration(
@@ -188,7 +199,7 @@ Widget couponDiscount({@required double discount}) {
     child: Text(
       '-$discount%',
       style: TextStyle(
-        fontSize: 24.0,
+        fontSize: fontSize,
         color: _textColor,
       ),
     ),
