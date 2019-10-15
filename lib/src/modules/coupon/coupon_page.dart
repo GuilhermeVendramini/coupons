@@ -34,7 +34,7 @@ class _CouponPageState extends State<CouponPage> {
                 child: Column(
                   children: <Widget>[
                     couponImage(
-                      storeImage: widget._coupon.store.name,
+                      storeImage: widget._coupon.store.image,
                       storeName: widget._coupon.store.name,
                     ),
                     SizedBox(
