@@ -170,8 +170,7 @@ Widget couponDescription({@required String description}) {
 
 Widget couponImage({@required String storeImage, @required String storeName}) {
   return Container(
-    height: 140.0,
-    padding: EdgeInsets.all(4.0),
+    height: 120.0,
     child: CachedNetworkImage(
       imageUrl: storeImage,
       placeholder: (context, url) => CupertinoActivityIndicator(),
