@@ -16,10 +16,10 @@ class Favorites extends FavoritesBloc {
     List<int> _favoriteCouponsID = _appBloc.getFavoriteCouponsID;
     List<CouponModel> _coupons = _appBloc.getCoupons;
 
-    if(_coupons == null)
-      return [];
+    if (_coupons == null) return [];
 
-    return _coupons.where((coupon) => _favoriteCouponsID.contains(coupon.id))
+    return _coupons
+        .where((coupon) => _favoriteCouponsID.contains(coupon.id))
         .toList();
   }
 }

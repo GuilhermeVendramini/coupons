@@ -25,7 +25,7 @@ class CouponProvider extends Coupon {
       if (_appBloc.getMyCouponsID.isEmpty) return false;
 
       int _result = _appBloc.getMyCouponsID.firstWhere(
-            (coupon) => coupon == couponID,
+        (coupon) => coupon == couponID,
         orElse: () => null,
       );
 

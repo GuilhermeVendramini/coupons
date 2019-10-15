@@ -19,4 +19,6 @@ class Strings {
   static const String couponCodeCopy = "Copiar";
   static const String couponObtainCode = "Obter cupom";
   static const String couponLoadError = "Não foi possível carregar os cupons";
+  static const String couponCodeValidity = "Código válido até:";
+  static const String couponRedeem = "Resgatar cupom";
 }

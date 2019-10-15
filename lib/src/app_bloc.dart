@@ -66,7 +66,7 @@ class AppProvider extends App {
     if (_coupons.value == null) {
       List<CouponModel> _result = await _lomadeeCouponsRepository
           .getCoupons()
-          .timeout(Duration(seconds: 10), onTimeout: () {
+          .timeout(Duration(seconds: 30), onTimeout: () {
         return [];
       });
       if (!_coupons.isClosed) {

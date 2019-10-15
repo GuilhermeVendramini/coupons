@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 import 'package:provider/provider.dart';
 
 import '../../shared/colors/default_colors.dart';
@@ -20,6 +21,7 @@ class CouponPage extends StatefulWidget {
 
 class _CouponPageState extends State<CouponPage> {
   final Color _textColor = DefaultColors.white;
+  final _flutterWebviewPlugin = new FlutterWebviewPlugin();
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +45,10 @@ class _CouponPageState extends State<CouponPage> {
                       height: 40.0,
                     ),
                     _description(),
+                    SizedBox(
+                      height: 40.0,
+                    ),
+                    _codeValidity(),
                     SizedBox(
                       height: 40.0,
                     ),
@@ -87,7 +93,7 @@ class _CouponPageState extends State<CouponPage> {
         AnimatedOpacity(
           duration: Duration(milliseconds: 500),
           opacity: data ? 1.0 : 0.0,
-          child: _couponObtained(),
+          child: data ? _couponObtained() : Container(),
         ),
         data ? Container() : _obtainCode(),
       ],
@@ -102,7 +108,38 @@ class _CouponPageState extends State<CouponPage> {
           height: 10.0,
         ),
         _code(),
+        SizedBox(
+          height: 40.0,
+        ),
+        _redeemCoupon(),
       ],
+    );
+  }
+
+  Widget _redeemCoupon() {
+    return Material(
+      color: DefaultColors.transparent,
+      child: Ink(
+        child: InkWell(
+          borderRadius: BorderRadius.circular(10.0),
+          child: Container(
+            padding: EdgeInsets.all(20.0),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10.0),
+              color: DefaultColors.black.withOpacity(0.1),
+            ),
+            child: Text(
+              Strings.couponRedeem.toUpperCase(),
+              style: TextStyle(
+                color: _textColor,
+                fontSize: 20.0,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+          ),
+          onTap: _webview,
+        ),
+      ),
     );
   }
 
@@ -249,5 +286,66 @@ class _CouponPageState extends State<CouponPage> {
         )
       ],
     );
+  }
+
+  Widget _codeValidity() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Text(
+          Strings.couponCodeValidity,
+          style: TextStyle(
+            fontSize: 12.0,
+            color: _textColor,
+          ),
+        ),
+        SizedBox(
+          width: 4.0,
+        ),
+        Text(
+          widget._coupon.vigency,
+          style: TextStyle(
+            fontSize: 12.0,
+            color: _textColor,
+          ),
+        ),
+      ],
+    );
+  }
+
+  void _webview() {
+    Clipboard.setData(ClipboardData(text: widget._coupon.code));
+
+    Navigator.of(context).push(
+      CupertinoPageRoute(
+        builder: (context) => Container(
+          color: DefaultColors.colorByDiscount(widget._coupon.discount),
+          child: SafeArea(
+            child: WebviewScaffold(
+                appBar: CupertinoNavigationBar(
+                  previousPageTitle: Strings.appName,
+                ),
+                withLocalStorage: true,
+                appCacheEnabled: true,
+                withZoom: true,
+                withJavascript: true,
+                clearCookies: false,
+                clearCache: false,
+                initialChild: Center(
+                  child: CupertinoActivityIndicator(),
+                ),
+                url: 'https://google.com' //widget._coupon.link,
+                ),
+          ),
+        ),
+      ),
+    );
+    _flutterWebviewPlugin.onDestroy.listen((_) {
+      if (Navigator.canPop(context)) {
+        Navigator.of(context).pop();
+        _flutterWebviewPlugin.dispose();
+        _flutterWebviewPlugin.cleanCookies();
+      }
+    });
   }
 }
