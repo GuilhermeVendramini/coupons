@@ -5,10 +5,10 @@ import 'package:flutter/cupertino.dart';
 import '../../models/coupon/coupon_model.dart';
 import 'coupon_card.dart';
 
-class CouponList extends StatelessWidget {
+class CouponVerticalList extends StatelessWidget {
   final List<CouponModel> _coupons;
 
-  CouponList(this._coupons);
+  CouponVerticalList(this._coupons);
 
   @override
   Widget build(BuildContext context) {

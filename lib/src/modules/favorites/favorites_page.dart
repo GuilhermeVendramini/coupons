@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 
 import '../../shared/models/coupon/coupon_model.dart';
-import '../../shared/widgets/coupon/coupon_list.dart';
+import '../../shared/widgets/coupon/coupon_vertical_list.dart';
 import 'favorites_bloc.dart';
 import 'widgets/empty_favorites_card.dart';
 
@@ -18,6 +18,6 @@ class _FavoritesPageState extends State<FavoritesPage> {
     final List<CouponModel> _favoriteCoupons = _bloc.getFavoriteCoupons;
     return _favoriteCoupons.isEmpty
         ? EmptyFavoritesCard()
-        : CouponList(_favoriteCoupons);
+        : CouponVerticalList(_favoriteCoupons);
   }
 }

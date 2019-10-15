@@ -5,6 +5,7 @@ import 'app_bloc.dart';
 import 'app_theme.dart';
 import 'modules/favorites/favorites_module.dart';
 import 'modules/home/home_module.dart';
+import 'modules/my_coupons/my_coupons_module.dart';
 import 'shared/languages/pt-br/strings.dart';
 
 class AppWidget extends StatelessWidget {
@@ -54,7 +55,7 @@ class AppWidget extends StatelessWidget {
             case 2:
               return CupertinoPageScaffold(
                 child: SafeArea(
-                  child: Text('2'),
+                  child: MyCouponsModule(),
                 ),
               );
               break;

@@ -13,6 +13,7 @@ class Strings {
 
   // MyCoupons
   static const String myCouponsTitle = "Meus Cupons";
+  static const String myCouponsEmptyMessage = "Você ainda não possui cupons";
 
   // Coupon
   static const String couponCodeTitle = "Cupom";
