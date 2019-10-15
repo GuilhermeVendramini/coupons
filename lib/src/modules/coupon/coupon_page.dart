@@ -334,7 +334,7 @@ class _CouponPageState extends State<CouponPage> {
                 initialChild: Center(
                   child: CupertinoActivityIndicator(),
                 ),
-                url: 'https://google.com' //widget._coupon.link,
+                url: widget._coupon.link,
                 ),
           ),
         ),
