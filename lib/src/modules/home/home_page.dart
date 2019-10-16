@@ -24,7 +24,7 @@ class _HomePageState extends State<HomePage> {
           child: snapshot.data == CouponsState.LOADING
               ? CupertinoActivityIndicator()
               : StreamBuilder<List<CouponModel>>(
-                  initialData: [],
+                  initialData: null,
                   stream: _appBloc.getSearchedCoupons,
                   builder: (context, snapshot) {
                     switch (snapshot.connectionState) {
