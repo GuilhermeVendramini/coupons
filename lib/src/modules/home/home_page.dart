@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 
 import '../../app_bloc.dart';
+import '../../shared/models/coupon/coupon_model.dart';
 import '../../shared/widgets/coupon/coupon_vertical_list.dart';
+import '../../shared/widgets/messages/coupon_messages.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -21,7 +23,25 @@ class _HomePageState extends State<HomePage> {
           alignment: Alignment.center,
           child: snapshot.data == CouponsState.LOADING
               ? CupertinoActivityIndicator()
-              : CouponVerticalList(_appBloc.getCoupons),
+              : StreamBuilder<List<CouponModel>>(
+                  initialData: [],
+                  stream: _appBloc.getSearchedCoupons,
+                  builder: (context, snapshot) {
+                    switch (snapshot.connectionState) {
+                      case ConnectionState.none:
+                      case ConnectionState.active:
+                      case ConnectionState.waiting:
+                      case ConnectionState.done:
+                        if (snapshot.hasError) return messageCouponLoadError();
+                        if (snapshot.data == null)
+                          return CupertinoActivityIndicator();
+                        if (snapshot.data.length > 0)
+                          return CouponVerticalList(snapshot.data);
+                        return messageCouponNotFound();
+                    }
+                    return null;
+                  },
+                ),
         );
       },
     );

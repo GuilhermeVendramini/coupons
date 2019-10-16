@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:rxdart/subjects.dart';
 
@@ -18,11 +20,15 @@ class AppBloc with ChangeNotifier {
   final BehaviorSubject<CouponsState> _couponsState =
       BehaviorSubject<CouponsState>();
 
+  final BehaviorSubject<List<CouponModel>> _searchedCoupons =
+      BehaviorSubject<List<CouponModel>>();
+
   List<int> _favoriteCoupons;
   List<int> _myCoupons;
 
   @override
   void dispose() {
+    _searchedCoupons.close();
     _coupons.close();
     _couponsState.close();
     super.dispose();
@@ -36,6 +42,10 @@ class App extends AppBloc {
 
   List<CouponModel> get getCoupons {
     return _coupons.value;
+  }
+
+  Stream<List<CouponModel>> get getSearchedCoupons {
+    return _searchedCoupons.stream;
   }
 
   List<int> get getFavoriteCouponsID {
@@ -71,11 +81,23 @@ class AppProvider extends App {
       });
       if (!_coupons.isClosed) {
         _coupons.add(_result);
+        _searchedCoupons.add(_result);
         _coupons.close();
         _couponsState.add(CouponsState.DONE);
         _couponsState.close();
       }
     }
+  }
+
+  void searchCoupons(String search) {
+    final _search = search.trim().toLowerCase();
+    _searchedCoupons.value = _coupons.value
+        .where((coupon) =>
+            coupon.store.name.toLowerCase().contains(_search) ||
+            coupon.description.toLowerCase().contains(_search) ||
+            coupon.category.name.toLowerCase().contains(_search) ||
+            coupon.discount.toString().contains(_search))
+        .toList();
   }
 
   Future<Null> loadFavorites() async {

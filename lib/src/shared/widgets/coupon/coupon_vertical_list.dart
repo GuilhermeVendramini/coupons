@@ -1,8 +1,7 @@
-import 'package:coupons/src/shared/colors/default_colors.dart';
-import 'package:coupons/src/shared/languages/pt-br/strings.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../../models/coupon/coupon_model.dart';
+import '../messages/coupon_messages.dart';
 import 'coupon_card.dart';
 
 class CouponVerticalList extends StatelessWidget {
@@ -26,10 +25,7 @@ class CouponVerticalList extends StatelessWidget {
             ),
           )
         : Container(
-            child: Text(
-              Strings.couponLoadError,
-              style: TextStyle(color: DefaultColors.primary),
-            ),
+            child: messageCouponNotFound(),
           );
   }
 }
