@@ -42,6 +42,7 @@ Widget couponCodeTitle() {
 
 Widget couponCode({@required String code, double fontSize = 28.0}) {
   return Wrap(
+    crossAxisAlignment: WrapCrossAlignment.center,
     alignment: WrapAlignment.center,
     spacing: 10.0,
     runSpacing: 10.0,
