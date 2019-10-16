@@ -100,7 +100,7 @@ class CouponCard extends StatelessWidget {
   Widget _title() {
     return Flexible(
       child: Text(
-        _coupon.store.name,
+        _coupon.id.toString(),
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
         style: TextStyle(

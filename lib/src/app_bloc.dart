@@ -56,6 +56,10 @@ class App extends AppBloc {
     return _myCoupons;
   }
 
+  SqfliteCouponsRepository get getSqfliteCouponsRepository {
+    return _sqfliteCouponsRepository;
+  }
+
   set addToMyCoupons(int couponID) {
     _myCoupons.add(couponID);
   }

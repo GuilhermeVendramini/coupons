@@ -1,24 +1,19 @@
 import 'package:flutter/foundation.dart';
 
 import '../../app_bloc.dart';
-import '../../repositories/sqflite/coupons/sqflite_coupons_repository.dart';
 
 class CouponBloc with ChangeNotifier {
   final AppProvider _appBloc;
-  final SqfliteCouponsRepository _sqfliteCouponsRepository;
 
-  CouponBloc(this._appBloc, this._sqfliteCouponsRepository);
+  CouponBloc(this._appBloc);
 }
 
 class Coupon extends CouponBloc {
-  Coupon(AppProvider appBloc, SqfliteCouponsRepository sqfliteCouponsRepository)
-      : super(appBloc, sqfliteCouponsRepository);
+  Coupon(AppProvider appBloc) : super(appBloc);
 }
 
 class CouponProvider extends Coupon {
-  CouponProvider(
-      AppProvider appBloc, SqfliteCouponsRepository sqfliteCouponsRepository)
-      : super(appBloc, sqfliteCouponsRepository);
+  CouponProvider(AppProvider appBloc) : super(appBloc);
 
   Future<bool> couponAlreadyObtained({int couponID}) async {
     try {
@@ -41,8 +36,8 @@ class CouponProvider extends Coupon {
 
   Future<Null> obtainCode({@required int couponID}) async {
     try {
-      bool _result =
-          await _sqfliteCouponsRepository.insertMyCoupon(couponID: couponID);
+      bool _result = await _appBloc.getSqfliteCouponsRepository
+          .insertMyCoupon(couponID: couponID);
       if (_result) _appBloc.addToMyCoupons = couponID;
 
       notifyListeners();

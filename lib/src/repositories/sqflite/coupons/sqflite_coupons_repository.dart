@@ -58,6 +58,19 @@ class SqfliteCouponsRepository extends SQFLiteConnection {
     return false;
   }
 
+  Future<bool> deleteCoupons(
+      {@required List<int> couponsID, @required String table}) async {
+    final _db = await database;
+    int _result = await _db.rawDelete(
+        "DELETE from $table WHERE coupon_id IN (${couponsID.join(',')})");
+
+    if (_result != null && _result > 0) {
+      return true;
+    }
+
+    return false;
+  }
+
   Future<bool> insertMyCoupon({@required int couponID}) async {
     final _db = await database;
     int _result = await _db.insert('my_coupons', {"coupon_id": couponID});

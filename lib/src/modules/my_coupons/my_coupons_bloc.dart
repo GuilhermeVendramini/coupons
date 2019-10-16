@@ -25,5 +25,27 @@ class MyCoupons extends MyCouponsBloc {
 }
 
 class MyCouponsProvider extends MyCoupons {
-  MyCouponsProvider(AppProvider appBloc) : super(appBloc);
+  MyCouponsProvider(AppProvider appBloc) : super(appBloc) {
+    deleteInvalidCoupons();
+  }
+
+  void deleteInvalidCoupons() {
+    try {
+      List<int> _myCouponsID = _appBloc.getMyCouponsID;
+      List<CouponModel> _coupons = _appBloc.getCoupons;
+
+      List<int> _invalidMyCoupons = _myCouponsID.where((couponID) {
+        if (_coupons.where((coupon) => coupon.id == couponID).length == 0)
+          return true;
+        return false;
+      }).toList();
+
+      if (_invalidMyCoupons != null && _invalidMyCoupons.length > 0) {
+        _appBloc.getSqfliteCouponsRepository
+            .deleteCoupons(couponsID: _invalidMyCoupons, table: 'my_coupons');
+      }
+    } catch (e) {
+      print('MyCouponsBloc - deleteInvalidCoupons(): $e');
+    }
+  }
 }

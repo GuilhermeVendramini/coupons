@@ -25,5 +25,26 @@ class Favorites extends FavoritesBloc {
 }
 
 class FavoritesProvider extends Favorites {
-  FavoritesProvider(AppProvider appBloc) : super(appBloc);
+  FavoritesProvider(AppProvider appBloc) : super(appBloc) {
+    deleteInvalidCoupons();
+  }
+
+  void deleteInvalidCoupons() {
+    try {
+      List<int> _favoriteCouponsID = _appBloc.getFavoriteCouponsID;
+      List<CouponModel> _coupons = _appBloc.getCoupons;
+      List<int> _invalidMyCoupons = _favoriteCouponsID.where((couponID) {
+        if (_coupons.where((coupon) => coupon.id == couponID).length == 0)
+          return true;
+        return false;
+      }).toList();
+
+      if (_invalidMyCoupons != null && _invalidMyCoupons.length > 0) {
+        _appBloc.getSqfliteCouponsRepository
+            .deleteCoupons(couponsID: _invalidMyCoupons, table: 'favorites');
+      }
+    } catch (e) {
+      print('FavoritesBloc - deleteInvalidCoupons(): $e');
+    }
+  }
 }
