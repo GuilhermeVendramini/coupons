@@ -74,3 +74,4 @@
 
 # Keys
 lib/src/repositories/lomadee/lomadee_config.dart
+android/key.properties

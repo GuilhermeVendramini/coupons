@@ -1,4 +1,4 @@
-package com.example.coupons
+package vendramini.coupons
 
 import android.os.Bundle
 
