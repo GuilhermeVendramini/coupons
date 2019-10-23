@@ -14,46 +14,60 @@ class CouponDisplay extends StatelessWidget {
     return Container(
       alignment: Alignment.topCenter,
       margin: EdgeInsets.all(8.0),
-      padding: EdgeInsets.all(20.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20.0),
-        color: DefaultColors.colorByDiscount(_coupon.discount),
-      ),
-      child: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            couponImage(
-              storeImage: _coupon.store.image,
-              storeName: _coupon.store.name,
-            ),
-            SizedBox(
-              height: 20.0,
-            ),
-            couponDescription(
-              description: _coupon.description,
-            ),
-            SizedBox(
-              height: 20.0,
-            ),
-            couponDiscount(
-              discount: _coupon.discount,
-              fontSize: 20.0,
-            ),
-            SizedBox(
-              height: 20.0,
-            ),
-            couponCodeValidity(
-              vigency: _coupon.vigency,
-            ),
-            SizedBox(
-              height: 20.0,
-            ),
-            couponObtained(
-              context: context,
-              coupon: _coupon,
-              fontSize: 20.0,
-            ),
+        gradient: LinearGradient(
+          begin: Alignment.topRight,
+          end: Alignment.bottomLeft,
+          colors: [
+            DefaultColors.colorByDiscount(_coupon.discount).shade900,
+            DefaultColors.colorByDiscount(_coupon.discount),
           ],
+        ),
+      ),
+      child: Container(
+        padding: EdgeInsets.all(20.0),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20.0),
+          color: DefaultColors.black.withOpacity(0.1),
+        ),
+        alignment: Alignment.topCenter,
+        child: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              couponImage(
+                storeImage: _coupon.store.image,
+                storeName: _coupon.store.name,
+              ),
+              SizedBox(
+                height: 20.0,
+              ),
+              couponDescription(
+                description: _coupon.description,
+              ),
+              SizedBox(
+                height: 20.0,
+              ),
+              couponDiscount(
+                discount: _coupon.discount,
+                fontSize: 20.0,
+              ),
+              SizedBox(
+                height: 20.0,
+              ),
+              couponCodeValidity(
+                vigency: _coupon.vigency,
+              ),
+              SizedBox(
+                height: 20.0,
+              ),
+              couponObtained(
+                context: context,
+                coupon: _coupon,
+                fontSize: 20.0,
+              ),
+            ],
+          ),
         ),
       ),
     );

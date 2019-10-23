@@ -194,7 +194,7 @@ Widget couponDiscount({@required double discount, double fontSize = 24.0}) {
     padding: EdgeInsets.all(12.0),
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(30.0),
-      color: DefaultColors.white.withOpacity(0.1),
+      color: DefaultColors.white.withOpacity(0.2),
     ),
     child: Text(
       '-$discount%',

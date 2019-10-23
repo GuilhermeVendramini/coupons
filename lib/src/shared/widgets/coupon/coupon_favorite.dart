@@ -12,7 +12,7 @@ class CouponFavorite extends StatelessWidget {
   final Icon _favoriteIcon = Icon(
     CupertinoIcons.heart_solid,
     size: 40.0,
-    color: DefaultColors.red,
+    color: DefaultColors.white,
   );
 
   final Icon _noFavoriteIcon = Icon(

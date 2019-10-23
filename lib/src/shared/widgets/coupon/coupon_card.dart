@@ -16,13 +16,22 @@ class CouponCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
+      color: DefaultColors.transparent,
       child: Container(
+        padding: EdgeInsets.all(20.0),
         margin: const EdgeInsets.all(10.0),
-        child: Ink(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20.0),
-            color: DefaultColors.colorByDiscount(_coupon.discount),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20.0),
+          gradient: LinearGradient(
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+            colors: [
+              DefaultColors.colorByDiscount(_coupon.discount).shade600,
+              DefaultColors.colorByDiscount(_coupon.discount).shade900,
+            ],
           ),
+        ),
+        child: Ink(
           child: InkWell(
             borderRadius: BorderRadius.circular(20.0),
             onTap: () {
@@ -51,17 +60,9 @@ class CouponCard extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(20.0),
-          ),
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomLeft,
-            colors: [
-              DefaultColors.white.withOpacity(0.2),
-              DefaultColors.transparent
-            ],
+            topRight: Radius.circular(20.0),
           ),
         ),
-        padding: const EdgeInsets.all(20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -78,8 +79,7 @@ class CouponCard extends StatelessWidget {
 
   Widget _header() {
     return Container(
-      padding: EdgeInsets.only(bottom: 10.0),
-      //constraints: const BoxConstraints(minWidth: double.infinity),
+      padding: EdgeInsets.only(bottom: 8.0),
       decoration: BoxDecoration(
         border: Border(
           bottom: BorderSide(
@@ -135,46 +135,29 @@ class CouponCard extends StatelessWidget {
 
   Widget _discount() {
     return Container(
-      padding: EdgeInsets.all(8.0),
+      padding: EdgeInsets.all(10.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20.0),
-        color: DefaultColors.colorByDiscount(_coupon.discount),
+        color: DefaultColors.white.withOpacity(0.2),
       ),
       child: Text(
         '-${_coupon.discount.round().toString()}%',
         style: TextStyle(
           color: _textColor,
           fontWeight: FontWeight.bold,
-          fontSize: 18.0,
+          fontSize: 16.0,
         ),
       ),
     );
   }
 
   Widget _footer() {
-    return Container(
-      padding: const EdgeInsets.all(20.0),
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topRight,
-          end: Alignment.bottomLeft,
-          colors: [
-            DefaultColors.white.withOpacity(0.1),
-            DefaultColors.colorByDiscount(_coupon.discount),
-          ],
-        ),
-        borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(20.0),
-          bottomRight: Radius.circular(20.0),
-        ),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          _category(),
-          _discount(),
-        ],
-      ),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: <Widget>[
+        _category(),
+        _discount(),
+      ],
     );
   }
 }

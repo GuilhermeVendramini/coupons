@@ -23,43 +23,58 @@ class _CouponPageState extends State<CouponPage> {
         onWillPop: () async {
           return Navigator.pop(context);
         },
-        child: CupertinoPageScaffold(
-          backgroundColor:
-              DefaultColors.colorByDiscount(widget._coupon.discount),
-          child: SingleChildScrollView(
-            child: SafeArea(
-              child: Container(
-                alignment: Alignment.center,
-                padding: const EdgeInsets.all(20.0),
-                child: Column(
-                  children: <Widget>[
-                    couponImage(
-                      storeImage: widget._coupon.store.image,
-                      storeName: widget._coupon.store.name,
-                    ),
-                    SizedBox(
-                      height: 40.0,
-                    ),
-                    couponDescription(
-                      description: widget._coupon.description,
-                    ),
-                    SizedBox(
-                      height: 40.0,
-                    ),
-                    couponDiscount(
-                      discount: widget._coupon.discount,
-                    ),
-                    SizedBox(
-                      height: 40.0,
-                    ),
-                    couponCodeValidity(
-                      vigency: widget._coupon.vigency,
-                    ),
-                    SizedBox(
-                      height: 40.0,
-                    ),
-                    CouponBox(widget._coupon),
-                  ],
+        child: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+              colors: [
+                DefaultColors.colorByDiscount(widget._coupon.discount).shade900,
+                DefaultColors.colorByDiscount(widget._coupon.discount),
+              ],
+            ),
+          ),
+          child: SafeArea(
+            child: Container(
+              margin: const EdgeInsets.all(6.0),
+              padding: const EdgeInsets.all(20.0),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20.0),
+                color: DefaultColors.black.withOpacity(0.1),
+              ),
+              child: CupertinoPageScaffold(
+                backgroundColor: DefaultColors.transparent,
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: <Widget>[
+                      couponImage(
+                        storeImage: widget._coupon.store.image,
+                        storeName: widget._coupon.store.name,
+                      ),
+                      SizedBox(
+                        height: 40.0,
+                      ),
+                      couponDescription(
+                        description: widget._coupon.description,
+                      ),
+                      SizedBox(
+                        height: 40.0,
+                      ),
+                      couponDiscount(
+                        discount: widget._coupon.discount,
+                      ),
+                      SizedBox(
+                        height: 40.0,
+                      ),
+                      couponCodeValidity(
+                        vigency: widget._coupon.vigency,
+                      ),
+                      SizedBox(
+                        height: 40.0,
+                      ),
+                      CouponBox(widget._coupon),
+                    ],
+                  ),
                 ),
               ),
             ),
