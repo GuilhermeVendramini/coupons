@@ -16,10 +16,7 @@ class CouponCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: DefaultColors.transparent,
-      child: Container(
-        padding: EdgeInsets.all(20.0),
-        margin: const EdgeInsets.all(10.0),
+      child: Ink(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20.0),
           gradient: LinearGradient(
@@ -31,15 +28,16 @@ class CouponCard extends StatelessWidget {
             ],
           ),
         ),
-        child: Ink(
-          child: InkWell(
-            borderRadius: BorderRadius.circular(20.0),
-            onTap: () {
-              Navigator.push(
-                context,
-                CupertinoPageRoute(builder: (context) => CouponModule(_coupon)),
-              );
-            },
+        child: InkWell(
+          borderRadius: BorderRadius.circular(20.0),
+          onTap: () {
+            Navigator.push(
+              context,
+              CupertinoPageRoute(builder: (context) => CouponModule(_coupon)),
+            );
+          },
+          child: Container(
+            padding: EdgeInsets.all(20.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

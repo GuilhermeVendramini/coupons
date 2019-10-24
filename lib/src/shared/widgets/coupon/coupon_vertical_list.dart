@@ -13,10 +13,12 @@ class CouponVerticalList extends StatelessWidget {
   Widget build(BuildContext context) {
     return _coupons != null && _coupons.length > 0
         ? Container(
+            margin: const EdgeInsets.all(10.0),
             child: GridView.builder(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 1,
                 childAspectRatio: 1.5,
+                mainAxisSpacing: 20.0,
               ),
               itemCount: _coupons.length,
               itemBuilder: (BuildContext context, int index) {
