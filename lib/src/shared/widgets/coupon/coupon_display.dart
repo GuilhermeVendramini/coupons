@@ -20,8 +20,8 @@ class CouponDisplay extends StatelessWidget {
           begin: Alignment.topRight,
           end: Alignment.bottomLeft,
           colors: [
-            DefaultColors.colorByDiscount(_coupon.discount).shade900,
-            DefaultColors.colorByDiscount(_coupon.discount),
+            DefaultColors.colorByDiscount(_coupon.discount).shade600,
+            DefaultColors.colorByDiscount(_coupon.discount).shade200,
           ],
         ),
       ),

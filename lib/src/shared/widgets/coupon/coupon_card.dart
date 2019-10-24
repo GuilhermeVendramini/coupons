@@ -23,8 +23,8 @@ class CouponCard extends StatelessWidget {
             begin: Alignment.topRight,
             end: Alignment.bottomLeft,
             colors: [
+              DefaultColors.colorByDiscount(_coupon.discount).shade400,
               DefaultColors.colorByDiscount(_coupon.discount).shade600,
-              DefaultColors.colorByDiscount(_coupon.discount).shade900,
             ],
           ),
         ),
@@ -116,7 +116,6 @@ class CouponCard extends StatelessWidget {
       maxLines: 3,
       style: TextStyle(
         color: _textColor,
-        fontWeight: FontWeight.w300,
       ),
     );
   }

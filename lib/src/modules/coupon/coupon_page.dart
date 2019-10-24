@@ -29,8 +29,8 @@ class _CouponPageState extends State<CouponPage> {
               begin: Alignment.topRight,
               end: Alignment.bottomLeft,
               colors: [
-                DefaultColors.colorByDiscount(widget._coupon.discount).shade900,
-                DefaultColors.colorByDiscount(widget._coupon.discount),
+                DefaultColors.colorByDiscount(widget._coupon.discount).shade600,
+                DefaultColors.colorByDiscount(widget._coupon.discount).shade200,
               ],
             ),
           ),
